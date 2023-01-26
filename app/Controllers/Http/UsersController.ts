@@ -31,7 +31,8 @@ export default class UsersController {
               /* Linha Responsavel pela inserção da imagem no body, comentada devido não haver necessidade na mesma na criação de usuario inicial */
               //body.image = imageName
           }
-         
+          
+
 
         const user = await UserModel.create(body)
 
