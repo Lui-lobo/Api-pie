@@ -19,6 +19,8 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import UserModel from 'App/Models/UserModel'
+import Hash from '@ioc:Adonis/Core/Hash'
 
 Route.group(() => {
   
@@ -26,20 +28,28 @@ Route.group(() => {
     return { hello: 'world' }
   })
 
-  Route.post('login', async ({ auth, request, response }) => {
+  Route.post('/login', async ({ auth, request, response }) => {
     const email = request.input('email')
     const password = request.input('password')  
 
     console.log(email);
     console.log(password);
     
-  try {
-    const token = await auth.use('api').attempt(email, password)
-    return token
-  } catch {
-    return response.unauthorized('Invalid credentials')
-  }
+    // Lookup user manually
+    const user = await UserModel
+    .query()
+    .where('Login', email)
+    .firstOrFail()
 
+    if (!(await Hash.verify(user.PassWord, password))) {
+      return response.unauthorized('Invalid credentials')
+    }
+  
+    // Generate token
+    const token = await auth.use('api').generate(user)
+
+    return token;
+  
   })
   
 
