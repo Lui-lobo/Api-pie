@@ -48,6 +48,11 @@ Route.group(() => {
     // Generate token
     const token = await auth.use('api').generate(user)
 
+    response.type('application/json')
+    response.header('Access-Control-Allow-Origin', false)
+    response.location('http://localhost:4200')
+   
+
     return token;
   
   })
