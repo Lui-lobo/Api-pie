@@ -57,6 +57,7 @@ Route.group(() => {
   
   })
   
+  Route.resource('/primeiroAcesso', '').apiOnly();
 
   Route.resource('/register', 'UsersController').apiOnly()
   
