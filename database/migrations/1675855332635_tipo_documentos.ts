@@ -7,10 +7,6 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('tipoDocumento').unique()
-      table.integer('user_id').unsigned().references('id').inTable('user_models').onDelete('CASCADE')
-      table.integer('tipoDocumento_id').unsigned().references('id').inTable('tipo_documentos').onDelete('CASCADE')
-      table.string('documento').unique()
-      table.string('descDocumento')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
