@@ -59,6 +59,8 @@ Route.group(() => {
   
 
   Route.resource('/register', 'UsersController').apiOnly()
+
+  Route.resource('/documentos', 'DocumentosController').apiOnly()
   
 
 }).prefix('/api')
