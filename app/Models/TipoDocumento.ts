@@ -4,21 +4,20 @@ import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:
 import Documento from './Documento'
 
 export default class TipoDocumento extends BaseModel {
+
   @column({ isPrimary: true })
   public id: number
 
   @column()
   public tipoDocumento: string
-
+  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => Documento, {
-    localKey: 'tipoDocumento'
-  })
-  tipoDocumentos: BelongsTo<typeof Documento>
+  @belongsTo(() => Documento)
+  public documento: BelongsTo<typeof Documento>
 
 }
