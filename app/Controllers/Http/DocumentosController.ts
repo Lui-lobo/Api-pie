@@ -9,6 +9,7 @@ export default class DocumentosController {
     public async store({request, response}: HttpContextContract) {
 
         const body = request.body()
+        const h =  request.body()
         
         const documento = await Documento.create(body)
         response.status(201)
