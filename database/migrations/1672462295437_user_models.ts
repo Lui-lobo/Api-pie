@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.integer('id_status', 2)
       table.integer('id_tipo_user', 2)
       table.string('login')
-      table.string('pass_word')
+      table.string('password')
       table.string('hash_pass')
 
       /**

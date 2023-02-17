@@ -17,7 +17,7 @@ export default class UserModel extends BaseModel {
   public Login: string
 
   @column({ serializeAs: null })
-  public PassWord: string 
+  public password: string 
 
   @column()
   public HashPass: string
@@ -30,8 +30,8 @@ export default class UserModel extends BaseModel {
 
   @beforeSave()
   public static async hashPassword (user: UserModel) {
-    if(user.$dirty.PassWord) {
-      user.PassWord = await Hash.make(user.PassWord)
+    if(user.$dirty.password) {
+      user.password = await Hash.make(user.password)
     }
   }
 }

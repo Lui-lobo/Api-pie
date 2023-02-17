@@ -41,7 +41,7 @@ Route.group(() => {
     .where('Login', email)
     .firstOrFail()
 
-    if (!(await Hash.verify(user.PassWord, password))) {
+    if (!(await Hash.verify(user.password, password))) {
       return response.unauthorized('Invalid credentials')
     }
   
@@ -60,7 +60,9 @@ Route.group(() => {
 
   Route.resource('/register', 'UsersController').apiOnly()
 
-  Route.resource('/documentos', 'DocumentosController').apiOnly()
+  Route.group(() => {
+    Route.post('/documentos', 'DocumentosController')
+  }).middleware('auth')
   
 
 }).prefix('/api')

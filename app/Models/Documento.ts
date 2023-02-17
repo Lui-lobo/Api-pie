@@ -9,12 +9,10 @@ export default class Documento extends BaseModel {
   public id: number
 
   @hasOne(() => UserModel)
-  public userModel: HasOne<typeof UserModel>
+  public user_id: HasOne<typeof UserModel>
 
-  @hasMany(() => TipoDocumento, {
-    foreignKey: 'id'
-  })
-  public tipoDocumentos: HasMany<typeof TipoDocumento>
+  @hasMany(() => TipoDocumento)
+  public tipoDocumento_id: HasMany<typeof TipoDocumento>
 
   @column()
   public documento: string

@@ -6,10 +6,27 @@ import  Application  from '@adonisjs/core/build/standalone'
 
 export default class DocumentosController {
 
-    public async store({request, response}: HttpContextContract) {
+    public async handle({request, response, auth}: HttpContextContract) {
+        if(auth.isLoggedIn) {
+            const body = request.body()
+            const user = auth.user?.id;
+            console.log(user)
+            
+            const documento = await Documento.create(body)
+            response.status(201)
+
+            return {
+                message: "Documento Inserido com sucesso",
+                data: documento
+            }
+        }
+
+    }
+
+    public async store({request, response, auth}: HttpContextContract) {
 
         const body = request.body()
-        const h =  request.body()
+        const user = auth.user?.id;
         
         const documento = await Documento.create(body)
         response.status(201)
