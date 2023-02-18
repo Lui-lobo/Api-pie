@@ -80,7 +80,7 @@ export default class UsersController {
 
         const user = await UserModel.findOrFail(params.id);
 
-        user.PassWord = body.PassWord
+        user.password = body.password
         user.HashPass = body.HashPass
 
     }

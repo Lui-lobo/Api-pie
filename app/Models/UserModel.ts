@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeSave, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeSave, column, BelongsTo, belongsTo, hasMany, HasMany, } from '@ioc:Adonis/Lucid/Orm'
 import Hash from '@ioc:Adonis/Core/Hash'
+import Documento from './Documento'
 
 export default class UserModel extends BaseModel {
   
@@ -34,5 +35,11 @@ export default class UserModel extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
+
+  @hasMany(() => Documento, {
+    foreignKey: 'user_id'
+  })
+  public documentos: HasMany<typeof Documento>
+
 }
 

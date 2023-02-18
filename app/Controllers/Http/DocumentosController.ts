@@ -2,17 +2,18 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Documento from 'App/Models/Documento'
 
-import  Application  from '@adonisjs/core/build/standalone'
-
 export default class DocumentosController {
 
     public async handle({request, response, auth}: HttpContextContract) {
+        
         if(auth.isLoggedIn) {
             const body = request.body()
+
             const user = auth.user?.id;
+
             console.log(user)
             
-            const documento = await Documento.create(body)
+            const documento = await Documento.create({ user_id: auth.user?.id, ...body })
             response.status(201)
 
             return {

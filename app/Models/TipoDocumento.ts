@@ -7,8 +7,8 @@ export default class TipoDocumento extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column()
-  public tipoDocumento: string
+  /*@column()
+  public tipoDocumento: string*/
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -16,9 +16,7 @@ export default class TipoDocumento extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => Documento, {
-    localKey: 'tipoDocumento'
-  })
-  tipoDocumentos: BelongsTo<typeof Documento>
+  @belongsTo(() => Documento)
+  tipoDocumento: BelongsTo<typeof Documento>
 
 }
