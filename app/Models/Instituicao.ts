@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasOne, HasOne, HasMany, hasMany} from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, belongsTo, BelongsTo} from '@ioc:Adonis/Lucid/Orm'
 
 import UserModel from './UserModel'
 import Documento from './Documento'
@@ -9,24 +9,39 @@ export default class Instituicao extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @hasOne(() => UserModel)
-  public userModel: HasOne<typeof UserModel>
+  @column()
+  public user_id: number
 
   @column()
-  public nomeInstituicao: string
+  public nome_instituicao: string
 
   @column()
-  public nomeCeo: string
+  public nome_Ceo: string
 
-  @hasMany(() => Documento)
-  public documento: HasMany<typeof Documento>
+  @column()
+  public documento_user?: number
 
-  @hasMany(() => Contato)
-  public contato: HasMany<typeof Contato>
+  @column()
+  public contatos_user?: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+  
+  @belongsTo(() => UserModel, {
+    localKey: 'user_id'
+  })
+  public user: BelongsTo<typeof UserModel>
+
+  @belongsTo(() => Documento, {
+    localKey: 'documento_user'
+  }) 
+  public documento: BelongsTo<typeof Documento>
+
+  @belongsTo(() => Contato, {
+    localKey: 'contatos_user'
+  }) 
+  public contato: BelongsTo<typeof Contato>
 }

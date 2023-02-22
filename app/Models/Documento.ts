@@ -3,6 +3,7 @@ import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:
 
 import UserModel from './UserModel'
 import TipoDocumento from './TipoDocumento'
+import Instituicao from './Instituicao'
 
 export default class Documento extends BaseModel {
   @column({ isPrimary: true })
@@ -11,8 +12,8 @@ export default class Documento extends BaseModel {
   @column()
   public user_id?: number
 
-  @hasMany(() => TipoDocumento)
-  public tipoDocumento_id: HasMany<typeof TipoDocumento>
+  @column()
+  public tipo_Documento_id?: number
 
   @column()
   public documento: string
@@ -30,5 +31,15 @@ export default class Documento extends BaseModel {
     localKey: 'user_id'
   })
   public user: BelongsTo<typeof UserModel>
+
+  @belongsTo(() => TipoDocumento, {
+    localKey: 'tipo_Documento_id'
+  })
+  public tipoDocumentos: BelongsTo<typeof TipoDocumento>
+
+  @hasMany(() => Instituicao, {
+    foreignKey: 'documento_id'
+  })
+  public documentos: HasMany<typeof Instituicao>
 
 }

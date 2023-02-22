@@ -62,6 +62,8 @@ Route.group(() => {
 
   Route.group(() => {
     Route.post('/documentos', 'DocumentosController')
+    Route.post('/contatos', 'ContatoesController')
+    Route.post('/instituicao', 'InstituicaosController')
   }).middleware('auth')
   
 

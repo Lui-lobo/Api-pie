@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, HasMany, hasMany, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, BelongsTo, belongsTo } from '@ioc:Adonis/Lucid/Orm'
 
 import UserModel from './UserModel'
 import TipoContato from './TipoContato'
@@ -8,11 +8,11 @@ export default class Contato extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @hasOne(() => UserModel)
-  public userModel: HasOne<typeof UserModel>
+  @column()
+  public user_id?: number
 
-  @hasMany(() => TipoContato)
-  public tipoContato: HasMany<typeof TipoContato>
+  @column()
+  public tipo_contatoes_id?: number
 
   @column()
   public contato: string
@@ -25,4 +25,15 @@ export default class Contato extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => UserModel, {
+    localKey: 'user_id'
+  })
+  public user: BelongsTo<typeof UserModel>
+
+  @belongsTo(() => TipoContato, {
+    localKey: 'tipo_contatoes_id'
+  })
+  public tipoContatos: BelongsTo<typeof TipoContato>
+
 }
