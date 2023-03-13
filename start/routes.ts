@@ -60,6 +60,8 @@ Route.group(() => {
 
   Route.resource('/register', 'UsersController').apiOnly()
 
+  Route.resource('/recoverPass', 'ForgotPasswordsController')
+
   Route.group(() => {
     Route.post('/documentos', 'DocumentosController')
     Route.post('/contatos', 'ContatoesController')
