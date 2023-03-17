@@ -41,8 +41,13 @@ Route.group(() => {
     .where('Login', email)
     .firstOrFail()
 
-    if (!(await Hash.verify(user.password, password))) {
-      return response.unauthorized('Invalid credentials')
+    if (!(await Hash.verify(user.password, password)) && (user.Login, email)) {
+
+      response.unauthorized('Email ou senha Invalidos')
+      return {
+        message: "Email ou Senha Incorretos",
+        status: response.status
+      }
     }
   
     // Generate token
