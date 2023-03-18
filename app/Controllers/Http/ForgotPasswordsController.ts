@@ -9,7 +9,7 @@ export default class ForgotPasswordsController {
 
     
    async sendResetLinkEmail({request, session, response}) {
-    const emailUser = await request.input('login')
+    const emailUser = await request.input('email')
     console.log(emailUser)
 
         if(emailUser == null || emailUser == "" || emailUser === "" || emailUser == undefined) {
@@ -29,9 +29,9 @@ export default class ForgotPasswordsController {
                 Mail.send((message) => {
                 message
                     .from('teste@example.com')
-                    .to('')
+                    .to(emailUser)
                     .subject('Recover Pass')
-                    .htmlView('emails/recover', { name: 'Luiz' })
+                    .htmlView('emails/recover', { name: User.Login, url: 'https://your-app.com/verification-url' })
                 })
 
             } else {
