@@ -66,6 +66,7 @@ Route.group(() => {
   Route.resource('/register', 'UsersController').apiOnly()
 
   Route.post('/recoverPass', 'ForgotPasswordsController.sendResetLinkEmail')
+  Route.post('/recoverPassEmail', 'UsersController')
 
   Route.group(() => {
     Route.post('/documentos', 'DocumentosController')

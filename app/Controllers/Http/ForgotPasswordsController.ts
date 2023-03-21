@@ -34,8 +34,18 @@ export default class ForgotPasswordsController {
                     .htmlView('emails/recover', { name: User.Login, url: 'https://your-app.com/verification-url' })
                 })
 
+                return {
+                    message: 'email enviado com sucesso',
+                    data: request
+                }
+
             } else {
                 console.log('o usuario não existe')
+
+                return {
+                    message: 'email não enviado com sucesso',
+                    data: request
+                }
             }
         }
 
