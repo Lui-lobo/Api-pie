@@ -5,6 +5,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import UserModel from 'App/Models/UserModel'
 
 import Application from '@ioc:Adonis/Core/Application'
+import Hash from '@ioc:Adonis/Core/Hash'
 
 export default class UsersController {
 
@@ -74,16 +75,42 @@ export default class UsersController {
 
     }
 
-    public async update({params, request}: HttpContextContract) {
+    public async update({params, request, response}: HttpContextContract) {
 
         const body = request.body()
-        console.log(params.UserLogin)
+        const email = request.input('UserLogin')
+        const Token = request.input('Token')
 
-        const user = await UserModel.findByOrFail('login', params.UserLogin);
-        console.log(user)
+        if(!Token) {
+            response.status(401).send(false)
+        }
 
-        user.password = body.password
+        console.log(Token)
+        console.log(email)
 
+        const user = await UserModel.findByOrFail('login', email);
+
+        if (!user) {
+            return response.status(400).send(false)
+          }
+
+        const novaSenha = user.password = body.password
+
+        if (!await user.save()) {
+            return response.status(500).send(false)
+          }
+
+        const SenhaCriptografada = await Hash.make(novaSenha)
+
+        console.log(SenhaCriptografada)
+
+        await user.save()
+
+        return {
+            message: 'Sua senha foi atualizada com Sucesso',
+            data: user,
+            response: response.status(200).send(true)
+        }
     }
 
 }

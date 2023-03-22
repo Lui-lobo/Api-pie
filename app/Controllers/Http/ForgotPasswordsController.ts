@@ -43,7 +43,7 @@ export default class ForgotPasswordsController {
                     .from('teste@example.com')
                     .to(emailUser)
                     .subject('Recover Pass')
-                    .htmlView('emails/recover', { name: User.Login, url: `http://localhost:4200/auth/recoverPassEmail?UserLogin=${User.Login}&Token=${randomString.generate()}`})
+                    .htmlView('emails/recover', { name: User.Login, url: `http://localhost:4200/auth/recoverPassEmail?UserLogin=${User?.Login}&Token=${randomString.generate()}`})
                 })
 
                 if(!(User?.Login, emailUser)) {
