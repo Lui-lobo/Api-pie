@@ -77,11 +77,12 @@ export default class UsersController {
     public async update({params, request}: HttpContextContract) {
 
         const body = request.body()
+        console.log(params.UserLogin)
 
-        const user = await UserModel.findOrFail(params.id);
+        const user = await UserModel.findByOrFail('login', params.UserLogin);
+        console.log(user)
 
         user.password = body.password
-        user.HashPass = body.HashPass
 
     }
 
