@@ -15,6 +15,12 @@ export default class Pedido extends BaseModel {
   public tipo_pedido_id?: number
 
   @column()
+  public nome_pedido:string
+  
+  @column()
+  public valor_do_pedido:string
+
+  @column()
   public forma_de_pagamento_id?: number
 
   @column()

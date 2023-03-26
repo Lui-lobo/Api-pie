@@ -91,13 +91,13 @@ export default class UsersController {
         const user = await UserModel.findByOrFail('login', email);
 
         if (!user) {
-            return response.status(400).send(false)
+            return response.status(400)
           }
 
         const novaSenha = user.password = body.password
 
         if (!await user.save()) {
-            return response.status(500).send(false)
+            return response.status(500)
           }
 
         const SenhaCriptografada = await Hash.make(novaSenha)
