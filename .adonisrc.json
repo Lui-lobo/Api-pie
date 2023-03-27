@@ -14,7 +14,8 @@
     "Database": "database",
     "Contracts": "contracts",
     "resources": "resources",
-    "views" : "views"
+    "views" : "views",
+    "emails" : "emails"
   },
   "preloads": [
     "./start/routes",
@@ -42,6 +43,16 @@
       }
     ]
   },
+  "metaFiles": [
+    ".adonisrc.json",
+    {
+      "pattern": "public/**",
+      "reloadServer": false
+    },
+    {
+      "pattern": "resources/views/**/*.edge",
+      "reloadServer": false
+    }],
   "testProviders": [
     "@japa/preset-adonis/TestsProvider"
   ]
