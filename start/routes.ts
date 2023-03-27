@@ -41,8 +41,9 @@ Route.group(() => {
     .where('Login', email)
     .firstOrFail()
 
-    if (!(await Hash.verify(user.password, password)) && (user.Login, email)) {
-
+    if (!(await Hash.verify(user.password, password)) && (user.Login,  email)) {
+      console.log(!(await Hash.verify(user.password, password)))
+      console.log(user.Login, email)
       response.unauthorized('Email ou senha Invalidos')
       return {
         message: "Email ou Senha Incorretos",
@@ -54,9 +55,7 @@ Route.group(() => {
     const token = await auth.use('api').generate(user)
 
     response.type('application/json')
-    response.header('Access-Control-Allow-Origin', false)
-    response.location('http://localhost:4200')
-   
+    response.header('Access-Control-Allow-Origin', false)   
 
     return token;
   

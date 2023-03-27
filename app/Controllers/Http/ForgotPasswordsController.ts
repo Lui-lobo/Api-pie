@@ -43,7 +43,7 @@ export default class ForgotPasswordsController {
                     .from('teste@example.com')
                     .to(emailUser)
                     .subject('Recover Pass')
-                    .htmlView('emails/recover', { name: User.Login, url: `https://pie-project-62974.web.app/auth/recoverPassEmail?UserLogin=${User?.Login}&Token=${randomString.generate()}`})
+                    .textView('emails/recover', { name: User.Login, url: `https://pie-project-62974.web.app/auth/recoverPassEmail?UserLogin=${User?.Login}&Token=${randomString.generate()}`})
                 })
 
                 if(!(User?.Login, emailUser)) {
